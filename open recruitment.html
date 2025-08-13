@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hasil Seleksi PMR WIRA SKANSA</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@500;700&family=Gloria+Hallelujah&family=Patrick+Hand&family=Coming+Soon&family=Architects+Daughter&display=swap" rel="stylesheet" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+      }
+
+      body {
+        background: linear-gradient(to bottom right, #fff5f5, #ffeaea);
+        min-height: 100vh;
+        width: 100%;
+      }
+
+      .page {
+        display: none;
+        padding: 20px;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      #formContainer {
+        display: flex;
+      }
+
+      .container {
+        background: #ffffff;
+        padding: 30px;
+        border-radius: 20px;
+        box-shadow: 0 10px 25px rgba(255, 0, 0, 0.15);
+        width: 100%;
+        max-width: 450px;
+        position: relative;
+        animation: fadeIn 0.8s ease-in-out;
+      }
+
+      .container::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 250px;
+        height: 250px;
+        background: url("https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Red_Cross.svg/1200px-Red_Cross.svg.png") no-repeat center;
+        background-size: contain;
+        opacity: 0.03;
+        transform: translate(-50%, -50%);
+        z-index: 0;
+        filter: blur(0.5px);
+      }
+
+      .container > * {
+        position: relative;
+        z-index: 1;
+      }
+
+      .corner-sticker {
+        position: absolute;
+        top: -10px;
+        left: -10px;
+        background-color: #d32f2f;
+        color: white;
+        padding: 6px 10px;
+        font-size: 12px;
+        font-weight: bold;
+        border-radius: 0 0 12px 0;
+      }
+
+      h1 {
+        text-align: center;
+        font-size: 22px;
+        color: #d50000;
+        margin-bottom: 10px;
+      }
+
+      .motivasi {
+        text-align: center;
+        font-size: 13px;
+        color: #555;
+        margin-bottom: 22px;
+        font-family: "Gloria Hallelujah", cursive;
+      }
+
+      label {
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 6px;
+        display: block;
+        color: #444;
+      }
+
+      input {
+        width: 100%;
+        padding: 10px;
+        font-size: 14px;
+        margin-bottom: 16px;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+      }
+
+      .note {
+        font-size: 12px;
+        color: #888;
+        text-align: center;
+        font-family: "Coming Soon", cursive;
+        margin-top: -10px;
+        margin-bottom: 20px;
+      }
+
+      button {
+        width: 100%;
+        padding: 12px;
+        font-size: 15px;
+        font-weight: bold;
+        background-color: #d32f2f;
+        color: #fff;
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+      }
+
+      .tagline {
+        margin-top: 16px;
+        text-align: center;
+        font-size: 13px;
+        color: #d32f2f;
+        font-family: "Patrick Hand", cursive;
+      }
+
+      #countdownText {
+        font-size: 18px;
+        margin-bottom: 16px;
+        color: #d32f2f;
+        text-align: center;
+        font-family: "Patrick Hand", cursive;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+      }
+
+      #countdownBox {
+        font-size: 100px;
+        font-weight: bold;
+        color: #d50000;
+        animation: pop 0.3s ease-in-out;
+      }
+
+      .hourglass {
+        display: inline-block;
+        font-size: 28px;
+        animation: shake 0.6s infinite alternate;
+      }
+
+      @keyframes shake {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(10deg);
+        }
+      }
+
+      .result-card {
+        background: #111;
+        border-radius: 16px;
+        color: #fff;
+        padding: 40px 30px;
+        font-size: 15px;
+        width: 100%;
+        max-width: 600px;
+        animation: fadeIn 0.5s ease-in-out;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      }
+
+      .result-card.lolos {
+        border-top: 6px solid #2196f3;
+      }
+
+      .result-card.tidak {
+        border-top: 6px solid #f44336;
+      }
+
+      .result-header {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        padding: 14px;
+        border-radius: 10px;
+        text-align: center;
+      }
+
+      .result-header.lolos {
+        background-color: #2196f3;
+        color: white;
+      }
+
+      .result-header.tidak {
+        background-color: #f44336;
+        color: white;
+      }
+
+      .result-data {
+        margin-bottom: 14px;
+        font-size: 15px;
+        line-height: 1.6;
+      }
+
+      .result-note {
+        margin-top: 20px;
+        background-color: #222;
+        padding: 16px;
+        border-radius: 10px;
+        font-size: 16px;
+        line-height: 1.6;
+        font-family: "Patrick Hand", cursive;
+        text-align: center;
+      }
+
+      .quote {
+        font-family: "Architects Daughter", cursive;
+        font-size: 15px;
+        text-align: center;
+        margin-top: 24px;
+        color: #ccc;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes pop {
+        0% {
+          transform: scale(0.5);
+          opacity: 0;
+        }
+        50% {
+          transform: scale(1.2);
+          opacity: 1;
+        }
+        100% {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .result-header {
+          font-size: 14.5px;
+          padding: 12px;
+        }
+
+        .result-note {
+          font-size: 14px;
+          padding: 12px;
+        }
+
+        .quote {
+          font-size: 14px;
+        }
+
+        .result-card {
+          padding: 24px 16px;
+        }
+      }
+
+    </style>
+  </head>
+  <body>
+    <div class="page" id="formContainer">
+      <div class="container">
+        <div class="corner-sticker">❤️🤍 PMR</div>
+        <h1>Hasil Seleksi PMR WIRA SKANSA ⛑️</h1>
+        <div class="motivasi">Apapun hasilnya... you're doing great, keep growing 🌱</div>
+        <label for="inputNama">Nama Lengkap:</label>
+        <input type="text" id="inputNama" placeholder="Nama Lengkap" />
+        <label for="inputKelas">Kelas:</label>
+        <input type="text" id="inputKelas" placeholder="Kelas" />
+        <div class="note">🩵 Jangan lupa berdoa & percaya diri yaa!</div>
+        <button onclick="lihatHasil()">Lihat Hasil Seleksi</button>
+        <div class="tagline">PMR Spirit yeah! 💪</div>
+        <div class="tagline">by: Farazz & IG: frzsjaa</div>
+      </div>
+    </div>
+    <div class="page" id="countdownPage">
+      <div id="countdownText"><span class="hourglass">⏳</span>Menampilkan hasil dalam hitungan...</div>
+      <div id="countdownBox">3</div>
+    </div>
+    <div class="page" id="hasilPage"></div>
+    <script>
+      const dataPeserta = {
+        "Faraz Alwan|XI TJKT 2": "Lolos",
+        "Budi Santoso|XI RPL 1": "Tidak Lolos",
+      };
+
+      document.getElementById("formContainer").style.display = "flex";
+
+      function lihatHasil() {
+        const nama = document.getElementById("inputNama").value.trim();
+        const kelas = document.getElementById("inputKelas").value.trim();
+        const key = $[nama]|$[kelas];
+        const hasil = dataPeserta[key];
+
+        document.getElementById("formContainer").style.display = "none";
+        document.getElementById("countdownPage").style.display = "flex";
+
+        let count = 3;
+        const countdownBox = document.getElementById("countdownBox");
+        countdownBox.innerText = count;
+
+        const interval = setInterval(() => {
+          count--;
+          if (count > 0) {
+            countdownBox.innerText = count;
+          } else {
+            clearInterval(interval);
+            document.getElementById("countdownPage").style.display = "none";
+            document.getElementById("hasilPage").style.display = "flex";
+
+            let status = hasil === "Lolos" ? "lolos" : "tidak";
+            let judul = hasil === "Lolos"
+              ? "SELAMAT! ANDA DINYATAKAN LOLOS SELEKSI ANGGOTA PMR WIRA SMKN 1 SUKOHARJO🎉⛑️"
+              : hasil === "Tidak Lolos"
+              ? "MAAF! ANDA DINYATAKAN TIDAK LOLOS SELEKSI ANGGOTA PMR WIRA SMKN 1 SUKOHARJO🫂 💌"
+              : "NAMA TIDAK DITEMUKAN DALAM DATA SELEKSI";
+
+            let catatan = hasil === "Lolos"
+              ? `<div class="result-note">
+                  Selamat bergabung bersama keluarga besar PMR WIRA ⛑️💉.<br>
+                  Kami tunggu partisipasi aktifmu di pertemuan dan kegiatan selanjutnya!
+                </div>`
+              : hasil === "Tidak Lolos"
+              ? `<div class="result-note">
+                  Tidak apa-apaa jika belum berhasil sekarang.<br>
+                  Proud of uu jangan berkecil hatii,<br>
+                  Teruslah melangkah dengan semangat yang sama yaa 🫂🤍
+                </div>`
+              : `<div class="result-note">
+                  Periksa kembali penulisan nama dan kelasnyaa.
+                </div>`;
+
+            let quote = hasil === "Lolos"
+              ? "You’re meant to be heree!✨"
+              : hasil === "Tidak Lolos"
+              ? "We’re proudd of your effort 🫂🩵"
+              : "Jangan tergesa-gesa ya!";
+
+            document.getElementById("hasilPage").innerHTML = `
+              <div class="result-card ${status}">
+                <div class="result-header ${status}">${judul}</div>
+                <div class="result-data">Nama: <strong>${nama}</strong></div>
+                <div class="result-data">Kelas: <strong>${kelas}</strong></div>
+                ${catatan}
+                <div class="quote">${quote}</div>
+                <button onclick="location.reload()"
+                  style="margin-top: 20px;
+                        background-color: #fff8e1;
+                        color: #f9a825;
+                        border: 1px solid #ffe082;
+                        padding: 10px 20px;
+                        border-radius: 10px;
+                        font-weight: bold;">
+                  🔁 Coba Lagi
+                </button>
+              </div>
+            `;
+          }
+        }, 1000);
+      }
+    </script>
+  </body>
+</html>
